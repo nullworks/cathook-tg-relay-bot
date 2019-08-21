@@ -13,7 +13,9 @@ Relay bot for catbots on Telegram
 
 ![](https://i.imgur.com/lo82yxM.png)
 
-![Obviously, Search YOUR bot here, not ours](https://i.imgur.com/BRclXtO.png)
+Obviously, Search YOUR bot here, not ours
+
+![](https://i.imgur.com/BRclXtO.png)
 
 ![](https://i.imgur.com/yb2iB3p.png)
 - You will now need to get your channel ID,to do this send a message to your channel, and Forward it to the [GetIDs Bot](https://t.me/getidsbot)
