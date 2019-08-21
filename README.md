@@ -7,7 +7,7 @@ Relay bot for catbots on Telegram
 - Get a Telegram bot using the [BotFather](https://t.me/BotFather)
 - Retrieve the auth token and save it in `config.json` by replacing `Your Telegram bot token here` With the appropiate token.
 - Create a Channel/Group and add Your bot to it (See below on how to add the Bot)
-![](https://i.imgur.com/SWjVdiu.png)
+![](https://i.imgur.com/scinN4O.png)
 
 ![](https://i.imgur.com/LVQgGSo.png)
 
