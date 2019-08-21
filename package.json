@@ -1,0 +1,28 @@
+{
+  "name": "cathook-relay-tg-bot",
+  "version": "0.0.1",
+  "description": "tg relay bot",
+  "main": "bot.js",
+  "dependencies": {
+    "dateformat": "^3.0.3",
+    "datetime": "0.0.3",
+    "fs": "0.0.1-security",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
+    "tail": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nullworks/cathook-tg-relay-bot.git"
+  },
+  "author": "LightCat",
+  "license": "SEE LICENSE IN <LICENSE>",
+  "bugs": {
+    "url": "https://github.com/nullworks/cathook-tg-relay-bot/issues"
+  },
+  "homepage": "https://github.com/nullworks/cathook-tg-relay-bot#readme"
+}
