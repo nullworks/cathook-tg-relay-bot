@@ -4,6 +4,7 @@
   "description": "tg relay bot",
   "main": "bot.js",
   "dependencies": {
+    "diff": ">=3.5.0",
     "dateformat": "^3.0.3",
     "datetime": "0.0.3",
     "fs": "0.0.1-security",
