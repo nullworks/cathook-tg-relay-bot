@@ -119,7 +119,7 @@ function send() {
                     continue;
                 let message = composeMessage(data);
                 let spam_check = getSpamCheckData(data);
-                if (message.indexOf(spam_check) != -1)
+                if (msg.indexOf(spam_check) != -1)
                     continue;
 
                 msg += message + '\n'
