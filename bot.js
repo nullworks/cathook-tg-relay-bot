@@ -75,6 +75,15 @@ function composeMessageRaw(data) {
 
     return `[ID ${ipcID}] [${time}] [U:1:${steamID}] ${username}: ${message}`;
 }
+function getSpamCheckData(data)
+{
+    let time = dateformat(+data[0] * 1000, "HH:MM:ss");
+    let steamID = data[1];
+    let username = data[2];
+    let message = data[3];
+    let ipcID = data[4];
+    return `[${time}] [U:1:${steamID}] ${username}: ${message}`;
+}
 
 function test_and_set(msg) {
     var j = stack_iterator;
@@ -109,6 +118,9 @@ function send() {
                 if (!antiSpam(data))
                     continue;
                 let message = composeMessage(data);
+                let spam_check = getSpamCheckData(data);
+                if (message.indexOf(spam_check) != -1)
+                    continue;
 
                 msg += message + '\n'
                 msgRaw += composeMessageRaw(data) + '\n';
