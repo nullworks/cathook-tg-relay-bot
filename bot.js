@@ -59,8 +59,8 @@ function antiSpam(data) {
 function composeMessage(data) {
     let time = dateformat(+data[0] * 1000, "HH:MM:ss");
     let steamID = data[1];
-    let username = data[2].replace(/[.*~_\\`]/g, '\\$&');
-    let message = data[3].replace(/[.*~_\\`]/g, '\\$&');
+    let username = data[2];
+    let message = data[3];
     let ipcID = data[4];
 
     return `[ID ${ipcID}] [${time}] [U:1:${steamID}] ${username}: ${message}`;
