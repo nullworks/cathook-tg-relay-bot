@@ -1,31 +1,31 @@
 const Tail = require('tail').Tail;
 const dateformat = require('dateformat');
 const fs = require('fs');
-var requestpromise = require("request-promise-native");
-const token  = require('./config.json').token;
+const requestpromise = require("request-promise-native");
+const token = require('./config.json').token;
 const channel = require('./config.json').channel;
 
-var queue = [];
-var stack = [];
+const queue = [];
+const stack = [];
 
 const stack_size = 10;
-var stack_iterator = 0;
+let stack_iterator = 0;
 
 function splitCSV(csv) {
     let result = [];
     let current = '';
     let quotes = false;
     for (let i = 0; i < csv.length; ++i) {
-        if (csv[i] == '"' && csv[i + 1] == '"') {
+        if (csv[i] === '"' && csv[i + 1] === '"') {
             current += '"';
             ++i;
             continue;
         }
-        if (csv[i] == '"') {
+        if (csv[i] === '"') {
             quotes = !quotes;
             continue;
         }
-        if (csv[i] == ',' && !quotes) {
+        if (csv[i] === ',' && !quotes) {
             result.push(current);
             current = '';
             continue;
@@ -44,7 +44,7 @@ function antiSpam(data) {
     if (muted[steamID])
         return false;
     if (!antiSpamData[steamID])
-        antiSpamData[steamID] = { count: 0, last: 0 };
+        antiSpamData[steamID] = {count: 0, last: 0};
     if (Date.now() - antiSpamData[steamID].last > 15 * 1000)
         antiSpamData[steamID].count = 0;
     antiSpamData[steamID].count++;
@@ -75,20 +75,20 @@ function composeMessageRaw(data) {
 
     return `[ID ${ipcID}] [${time}] [U:1:${steamID}] ${username}: ${message}`;
 }
-function getSpamCheckData(data)
-{
+
+function getSpamCheckData(data) {
     let time = dateformat(+data[0] * 1000, "HH:MM:ss");
     let steamID = data[1];
     let username = data[2];
     let message = data[3];
-    let ipcID = data[4];
+    //let ipcID = data[4];
     return `[${time}] [U:1:${steamID}] ${username}: ${message}`;
 }
 
 function test_and_set(msg) {
-    var j = stack_iterator;
-    for (var i = 0; i < 10; i++) {
-        if (stack[j] == msg) return false;
+    let j = stack_iterator;
+    for (let i = 0; i < 10; i++) {
+        if (stack[j] === msg) return false;
         j++;
         if (j >= stack_size) j = 0;
     }
@@ -102,7 +102,8 @@ function onLine(data) {
         if (test_and_set(data)) {
             queue.push(data);
         }
-    } catch (e) { }
+    } catch (e) {
+    }
 }
 
 
@@ -119,23 +120,23 @@ function send() {
                     continue;
                 let message = composeMessage(data);
                 let spam_check = getSpamCheckData(data);
-                if (msg.indexOf(spam_check) != -1)
+                if (msg.indexOf(spam_check) !== -1)
                     continue;
 
                 msg += message + '\n'
                 msgRaw += composeMessageRaw(data) + '\n';
-            }
-            catch (e) {
+            } catch (e) {
                 console.log('error', e);
             }
         }
-        if (msgRaw == '') return;
+        if (msgRaw === '') return;
         try {
             process.stdout.write(msgRaw);
             requestpromise(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${channel}&disable_web_page_preview=True&text=` + encodeURIComponent(msg));
+        } catch (e) {
         }
-        catch (e) { }
-    } catch (e) { }
+    } catch (e) {
+    }
 }
 
 setInterval(send, 8000);
@@ -145,7 +146,7 @@ function onError(error) {
 }
 
 let watching = {};
-var tails = [];
+const tails = [];
 
 function locateLogs() {
     try {
@@ -166,7 +167,9 @@ function locateLogs() {
                 }
             }
         });
-    } catch (e) { onError(e); }
+    } catch (e) {
+        onError(e);
+    }
 }
 
 locateLogs();

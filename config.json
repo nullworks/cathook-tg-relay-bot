@@ -1,1 +1,4 @@
-{"token":"Your Telegram bot token here", "channel":"Your Channel ID here"}
+{
+  "token": "Your Telegram bot token here",
+  "channel": "Your Channel ID here"
+}
