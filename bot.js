@@ -49,18 +49,16 @@ const composeMessage = (data) => {
   const steamID = data[1]
   const username = data[2]
   const message = data[3]
-  const ipcID = data[4]
 
-  return `[ID ${ipcID}] [U:1:${steamID}] ${username}: ${message}`
+  return `[U:1:${steamID}] ${username}: ${message}`
 }
 
 const composeMessageRaw = (data) => {
   const steamID = data[1]
   const username = data[2]
   const message = data[3]
-  const ipcID = data[4]
 
-  return `[ID ${ipcID}] [U:1:${steamID}] ${username}: ${message}`
+  return `[U:1:${steamID}] ${username}: ${message}`
 }
 
 const getSpamCheckData = (data) => {
