@@ -107,7 +107,7 @@ const send = () => {
         if (!antiSpam(data)) continue
         const message = composeMessage(data)
         const spamCheck = getSpamCheckData(data)
-        if (msg.includes(spamCheck)) continue
+        if (!msg.includes(spamCheck)) continue
 
         msg += `${message}\n`
         msgRaw += `${composeMessageRaw(data)}\n`
