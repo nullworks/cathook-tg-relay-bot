@@ -32,19 +32,6 @@ const splitCSV = (csv) => {
   return result
 }
 
-const antiSpamData = {}
-const muted = {}
-const antiSpam = (data) => {
-  const steamID = data[1]
-  if (muted[steamID]) return false
-  if (!antiSpamData[steamID]) antiSpamData[steamID] = { count: 0, last: 0 }
-  if (Date.now() - antiSpamData[steamID].last > 15000) antiSpamData[steamID].count = 0
-  antiSpamData[steamID].count++
-  antiSpamData[steamID].last = Date.now()
-  if (antiSpamData[steamID].count > 8) antiSpamData[steamID].banned = Date.now()
-  return !antiSpamData[steamID].banned
-}
-
 const composeMessage = (data) => {
   const steamID = data[1]
   const username = data[2]
@@ -54,14 +41,6 @@ const composeMessage = (data) => {
 }
 
 const composeMessageRaw = (data) => {
-  const steamID = data[1]
-  const username = data[2]
-  const message = data[3]
-
-  return `[U:1:${steamID}] ${username}: ${message}`
-}
-
-const getSpamCheckData = (data) => {
   const steamID = data[1]
   const username = data[2]
   const message = data[3]
@@ -104,10 +83,7 @@ const send = () => {
       try {
         const csv = queue.shift()
         const data = splitCSV(csv)
-        if (!antiSpam(data)) continue
         const message = composeMessage(data)
-        const spamCheck = getSpamCheckData(data)
-        if (!msg.includes(spamCheck)) continue
 
         msg += `${message}\n`
         msgRaw += `${composeMessageRaw(data)}\n`
